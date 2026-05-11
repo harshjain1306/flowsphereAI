@@ -6,16 +6,16 @@ import { Task } from '../models/Task';
 
 dotenv.config();
 
-const seedData = async () => {
+export const seedData = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI as string);
-    console.log('Connected to MongoDB for seeding...');
+    // Check if users already exist
+    const userCount = await User.countDocuments();
+    if (userCount > 0) {
+      console.log('Database already has data, skipping seed.');
+      return;
+    }
 
-    // Clear existing data
-    await User.deleteMany({});
-    await Project.deleteMany({});
-    await Task.deleteMany({});
-    console.log('Cleared existing data.');
+    console.log('Seeding database with demo data...');
 
     // Create Admin User
     const admin = await User.create({
@@ -75,13 +75,8 @@ const seedData = async () => {
       },
     ]);
     console.log('Demo tasks created.');
-
     console.log('Database seeded successfully!');
-    process.exit(0);
   } catch (error) {
     console.error('Error seeding database:', error);
-    process.exit(1);
   }
 };
-
-seedData();
