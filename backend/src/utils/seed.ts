@@ -8,10 +8,10 @@ dotenv.config();
 
 export const seedData = async () => {
   try {
-    // Check if users already exist
-    const userCount = await User.countDocuments();
-    if (userCount > 0) {
-      console.log('Database already has data, skipping seed.');
+    // Check if demo admin already exists
+    const adminExists = await User.findOne({ email: 'admin@flow.com' });
+    if (adminExists) {
+      console.log('Demo data already exists, skipping seed.');
       return;
     }
 
