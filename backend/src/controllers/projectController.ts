@@ -28,10 +28,13 @@ export const createProject = async (req: AuthRequest, res: Response): Promise<vo
 // @access  Private
 export const getProjects = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    // If admin, return all projects they created. If member, return projects they are part of.
-    const query = req.user.role === 'Admin' 
-      ? { admin: req.user._id } 
-      : { members: req.user._id };
+    // Return projects where user is either the admin OR a member
+    const query = {
+      $or: [
+        { admin: req.user._id },
+        { members: req.user._id }
+      ]
+    };
 
     const projects = await Project.find(query).populate('admin', 'name email').populate('members', 'name email');
     res.json(projects);
