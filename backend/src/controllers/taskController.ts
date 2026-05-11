@@ -103,3 +103,24 @@ export const deleteTask = async (req: AuthRequest, res: Response): Promise<void>
     res.status(500).json({ message: error.message });
   }
 };
+
+// @desc    Get all tasks for the logged in user
+// @route   GET /api/tasks
+// @access  Private
+export const getUserTasks = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const tasks = await Task.find({
+      $or: [
+        { assignedTo: req.user._id },
+        { createdBy: req.user._id }
+      ]
+    })
+    .populate('project', 'name')
+    .populate('assignedTo', 'name avatar')
+    .sort({ createdAt: -1 });
+
+    res.json(tasks);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};

@@ -37,12 +37,11 @@ export default function Dashboard() {
 
   // Fetch Tasks
   const { data: tasks = [] } = useQuery({
-    queryKey: ['tasks', projectId],
+    queryKey: ['tasks'],
     queryFn: async () => {
-      const res = await api.get(`/tasks/project/${projectId}`);
+      const res = await api.get('/tasks');
       return res.data;
     },
-    enabled: !!projectId,
   });
 
   // Update Task Content Mutation
