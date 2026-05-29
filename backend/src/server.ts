@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import { connectDB } from './config/db';
 import { seedData } from './utils/seed';
 
@@ -22,12 +23,16 @@ app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);
 
-// Basic route
-app.get('/', (req: Request, res: Response) => {
-  res.send('FlowSphere AI API is running...');
+// Serve frontend static files
+const staticPath = path.join(__dirname, '../../frontend/out');
+app.use(express.static(staticPath, { extensions: ['html'] }));
+
+// Catch-all route to serve index.html for client-side routing
+app.get('*', (req: Request, res: Response) => {
+  res.sendFile(path.join(staticPath, 'index.html'));
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
   try {

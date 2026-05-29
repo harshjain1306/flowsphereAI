@@ -2,12 +2,18 @@
   "name": "flowsphere-ai-monorepo",
   "version": "1.0.0",
   "description": "Premium Task Management SaaS Platform",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
-    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "install-all": "npm install && npm install --workspaces",
+    "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
+    "start": "node backend/dist/start-in-memory.js",
     "dev": "concurrently \"npm run dev-backend\" \"npm run dev-frontend\"",
-    "dev-backend": "cd backend && npm run dev",
-    "dev-frontend": "cd frontend && npm run dev",
-    "seed-db": "cd backend && npm run seed"
+    "dev-backend": "npm run dev --workspace=backend",
+    "dev-frontend": "npm run dev --workspace=frontend",
+    "seed-db": "npm run seed --workspace=backend"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

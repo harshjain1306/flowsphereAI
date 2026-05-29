@@ -34,64 +34,69 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020617] flex items-center justify-center p-6 relative overflow-hidden text-white">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/20 blur-[100px] rounded-full pointer-events-none" />
+    <div className="min-h-screen bg-[#FAF8FF] flex items-center justify-center p-6 relative overflow-hidden text-[#1C1E21] font-sans">
+      {/* Stark subtle grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#dee3e9_1px,transparent_1px),linear-gradient(to_bottom,#dee3e9_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20 pointer-events-none" />
+      
+      {/* Soft background glow */}
+      <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-[#0064E0]/5 blur-[100px] rounded-full pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md bg-[#0F172A]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 relative z-10 shadow-2xl"
+        className="w-full max-w-md bg-white border border-[#DEE3E9] rounded-[32px] p-8 relative z-10 shadow-2xl"
       >
+        {/* Logo */}
         <div className="flex justify-center mb-8">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-white" />
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-full bg-[#0A1317] flex items-center justify-center shadow-lg transition-transform group-hover:scale-105">
+              <span className="font-heading font-black text-lg text-white">FS</span>
             </div>
-            FlowSphere<span className="text-indigo-400">AI</span>
+            <span className="font-heading font-bold text-xl tracking-tight text-[#1C1E21]">FlowSphere</span>
           </Link>
         </div>
 
-        <h2 className="text-2xl font-bold text-center mb-2">Create an account</h2>
-        <p className="text-slate-400 text-center mb-8 text-sm">Join thousands of teams already using FlowSphere</p>
+        <h2 className="text-3xl font-heading font-black text-center text-[#1C1E21] tracking-tight mb-2">Create an account</h2>
+        <p className="text-[#5D6C7B] text-center mb-8 text-sm font-semibold">Join thousands of teams already using FlowSphere</p>
 
         {error && (
-          <div className="mb-6 p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-lg text-sm text-center">
+          <div className="mb-6 p-4 bg-[#E41E3F]/10 border border-[#E41E3F]/20 text-[#E41E3F] rounded-xl text-sm font-bold text-center">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Full Name</label>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-1.5">
+            <label className="block text-xs font-bold text-[#5D6C7B] uppercase tracking-wider pl-1">Full Name</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full bg-[#1E293B] border border-white/5 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+              className="w-full bg-white border border-[#CED0D4] rounded-xl px-4 py-3 text-[#1C1E21] placeholder-[#8595A4] focus:outline-none focus:ring-2 focus:ring-[#0064E0]/20 focus:border-[#0064E0] transition-all font-semibold text-sm h-11"
               placeholder="John Doe"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Email</label>
+          <div className="space-y-1.5">
+            <label className="block text-xs font-bold text-[#5D6C7B] uppercase tracking-wider pl-1">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full bg-[#1E293B] border border-white/5 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+              className="w-full bg-white border border-[#CED0D4] rounded-xl px-4 py-3 text-[#1C1E21] placeholder-[#8595A4] focus:outline-none focus:ring-2 focus:ring-[#0064E0]/20 focus:border-[#0064E0] transition-all font-semibold text-sm h-11"
               placeholder="you@company.com"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Password</label>
+          <div className="space-y-1.5">
+            <label className="block text-xs font-bold text-[#5D6C7B] uppercase tracking-wider pl-1">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="w-full bg-[#1E293B] border border-white/5 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+              className="w-full bg-white border border-[#CED0D4] rounded-xl px-4 py-3 text-[#1C1E21] placeholder-[#8595A4] focus:outline-none focus:ring-2 focus:ring-[#0064E0]/20 focus:border-[#0064E0] transition-all font-semibold text-sm h-11"
               placeholder="••••••••"
             />
           </div>
@@ -99,16 +104,16 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full group flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-2.5 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 mt-4"
+            className="w-full group flex items-center justify-center gap-2.5 bg-[#0064E0] hover:bg-[#0457CB] text-white px-4 py-3.5 rounded-full font-bold text-sm shadow-lg shadow-[#0064E0]/20 transition-all disabled:opacity-50 mt-4"
           >
             {isLoading ? 'Creating account...' : 'Create Account'}
             {!isLoading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
           </button>
         </form>
 
-        <p className="mt-8 text-center text-sm text-slate-400">
+        <p className="mt-8 text-center text-sm text-[#5D6C7B] font-semibold">
           Already have an account?{' '}
-          <Link href="/login" className="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">
+          <Link href="/login" className="text-[#0064E0] hover:underline font-bold transition-colors">
             Sign in
           </Link>
         </p>
