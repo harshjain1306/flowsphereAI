@@ -9,7 +9,7 @@
   "scripts": {
     "install-all": "npm install && npm install --workspaces",
     "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
-    "start": "node backend/dist/start-in-memory.js",
+    "start": "node backend/dist/server.js",
     "dev": "concurrently \"npm run dev-backend\" \"npm run dev-frontend\"",
     "dev-backend": "npm run dev --workspace=backend",
     "dev-frontend": "npm run dev --workspace=frontend",
