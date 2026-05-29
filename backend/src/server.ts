@@ -43,8 +43,8 @@ app.use('/api/tasks', taskRoutes);
 const staticPath = path.join(__dirname, '../../frontend/out');
 app.use(express.static(staticPath, { extensions: ['html'] }));
 
-// Catch-all route to serve index.html for client-side routing
-app.get('*', (req: Request, res: Response) => {
+// Catch-all route to serve index.html for client-side routing (Express 5 syntax)
+app.get('/{*path}', (req: Request, res: Response) => {
   res.sendFile(path.join(staticPath, 'index.html'));
 });
 
